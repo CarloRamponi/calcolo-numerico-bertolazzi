@@ -1,7 +1,7 @@
 // PENCO SALVI GIACOMO
 
 /*
-    LAGRANGE INTERPOLATION:
+    POLYNOMIAL INTERPOLATION LIBRARY:
         given n points retrieve the lowest degree
         polynomial which passes through those points.
 */
@@ -12,7 +12,8 @@
 using namespace std;
 using namespace Eigen;
 
-// Retrieve the polynomial passing through (x[i], fx[i]) points
+
+// Retrieve the polynomial passing through (x[i], fx[i]) points using Lagrange interpolation
 Poly LagrangeInterpolation(VectorXd x, VectorXd fx){
     int n=x.size();     // number of points
     Poly f(n);
@@ -49,3 +50,38 @@ Poly LagrangeInterpolation(VectorXd x, VectorXd fx){
 
     return f;
 }
+
+
+
+// Get Newton's divided difference coefficients
+double NewtonDividedDiff(VectorXd x, VectorXd fx){
+    int n=x.size();     // number of points
+
+    if (n==1)
+        return fx(0);
+    if (n==2)
+        return ( fx(0)-fx(1) )/( x(0)-x(1) );
+    
+    VectorXd xMinusFirst(n-1), xMinusLast(n-1);
+    VectorXd fxMinusFirst(n-1), fxMinusLast(n-1);
+    for (int i=0;i<n-1;i++){
+        xMinusFirst(i) = x(i+1);
+        xMinusLast(i) = x(i);
+        fxMinusFirst(i) = fx(i+1);
+        fxMinusLast(i) = fx(i);
+    }
+
+    return ( NewtonDividedDiff(xMinusLast, fxMinusLast) - NewtonDividedDiff(xMinusFirst, fxMinusFirst) )/(x(0)-x(n-1));
+}
+
+// Retrieve the polynomial passing through (x[i], fx[i]) points using Newton's divided differences interpolation
+Poly NewtonInterpolation(VectorXd x, VectorXd fx){
+    int n=x.size();     // number of points
+    Poly f(n);
+    double temp;
+    
+    // TO BE CONTINUED
+
+    return f;
+}
+
