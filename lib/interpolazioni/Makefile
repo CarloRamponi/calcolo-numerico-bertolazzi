@@ -1,3 +1,5 @@
+# Modify the Eigen path to compile the library and the test program
+
 EigenPath = /Users/giacorri/eigen-3.4.0
 
 ll: poly.o interpol.o testInterpol

@@ -7,7 +7,7 @@
 */
 
 #include "poly.h"           // Alice's polynomials library
-#include "interpol.h"
+#include "interpol.hpp"
 
 using namespace std;
 using namespace Eigen;
@@ -66,8 +66,8 @@ double NewtonDividedDiff(VectorXd x, VectorXd fx){
     VectorXd fxMinusFirst(n-1), fxMinusLast(n-1);
     for (int i=0;i<n-1;i++){
         xMinusFirst(i) = x(i+1);
-        xMinusLast(i) = x(i);
         fxMinusFirst(i) = fx(i+1);
+        xMinusLast(i) = x(i);
         fxMinusLast(i) = fx(i);
     }
 
@@ -78,9 +78,24 @@ double NewtonDividedDiff(VectorXd x, VectorXd fx){
 Poly NewtonInterpolation(VectorXd x, VectorXd fx){
     int n=x.size();     // number of points
     Poly f(n);
-    double temp;
-    
-    // TO BE CONTINUED
+
+    for (int i=0; i<n; i++){
+        VectorXd DivDiff(1), xTemp(i+1), fxTemp(i+1);
+        for (int j=0; j<i+1; j++){
+            xTemp(j) = x(j);            // prepare the set of the reduced points
+            fxTemp(j) = fx(j);           // in order to compute the coefficient 
+        }
+        DivDiff(0) = NewtonDividedDiff(xTemp, fxTemp);
+        Poly fAdd(DivDiff);
+        VectorXd mult(2);
+        mult(1) = 1;
+        for (int j=0; j<i; j++){
+            mult(0) = -x(j);
+            Poly fMult(mult);       // build factor polynomial (x-x_j)
+            fAdd = fAdd * fMult;
+        }
+        f = f + fAdd;
+    }
 
     return f;
 }

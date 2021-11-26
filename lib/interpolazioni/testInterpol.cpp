@@ -1,7 +1,13 @@
+// PENCO SALVI GIACOMO
+
+/* 
+ *      SIMPLE INTERPOLATION EXAMPLES
+ */
+
 #include <iostream>
 #include <Eigen/Dense>
 #include "poly.h"
-#include "interpol.h"
+#include "interpol.hpp"
 
 using namespace std;
 using namespace Eigen;
@@ -24,11 +30,30 @@ int main(){
     for (int i=0; i<x.size(); i++){
         cout << x(i) << " | " << fx(i) << endl;
     }
+    printf("\n");
+    
+    // LAGRANGE:
 
     Poly pol = LagrangeInterpolation(x, fx);
-    cout << "Interpoled polynomial: " << pol;
+    cout << "Lagrange interpoled polynomial: " << pol;
 
+    // Check that the polynomial really passes through the given points
+    for (int i=0; i<x.size(); i++)
+        cout << "p(" << x(i) << ") = " << pol.eval(x(i)) << endl;
+
+    // Evaluate the polynomial in x=10
+    cout << "p(10) = " << pol.eval(10) << endl << endl;
+
+    // NEWTON:
+    pol = NewtonInterpolation(x, fx);
+    cout << "Newton interpoled polynomial: " << pol;
+
+    // Check that the polynomial really passes through the given points
+    for (int i=0; i<x.size(); i++)
+        cout << "p(" << x(i) << ") = " << pol.eval(x(i)) << endl;
+
+    // Evaluate the polynomial in x=10
     cout << "p(10) = " << pol.eval(10) << endl;
-
+    
     return 0;
 }
