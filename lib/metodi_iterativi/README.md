@@ -13,3 +13,53 @@ Per compilare ed eseguire il test, eseguire questo comando (nella cartella `meto
 $ g++ -o main main.cpp metodi_iterativi.cpp -I<Cartella contenente la libreria Eigen>
 $ ./main
 ```
+
+## Metodi trattati
+
+- Metodo di Jacobi
+
+  ```C++
+  /**
+   * @brief Metodo di Jacobi
+   * @author Carlo Ramponi
+   * @param A matrice dei coefficienti
+   * @param b vettore dei termini noti
+   * @param x0 vettore di partenza
+   * @param tol errore massimo tollerato
+   * @param max_iter massimo numero di iterazioni
+   * @return vettore soluzione
+   */
+  Eigen::VectorXd jacobi(const Eigen::MatrixXd &A, const Eigen::VectorXd &b, const Eigen::VectorXd &x0, double tol, int max_iter);
+  ```
+
+- Metodo di Gauss-Seidel
+
+  ```C++
+  /**
+   * @brief Metodo di Gauss-Seidel
+   * @author Carlo Ramponi
+   * @param A matrice dei coefficienti
+   * @param b vettore dei termini noti
+   * @param x0 vettore di partenza
+   * @param tol errore massimo tollerato
+   * @param max_iter massimo numero di iterazioni
+   * @return Eigen::VectorXd 
+   */
+  Eigen::VectorXd cnum::gauss_seidel(const Eigen::MatrixXd &A, const Eigen::VectorXd &b, const Eigen::VectorXd &x0, double tol, int max_iter);
+  ```
+
+- Successive Over Relaxation
+  ```C++
+  /**
+   * @brief Successive Over Relaxation
+   * @author Carlo Ramponi
+   * @param A matrice dei coefficienti
+   * @param b vettore dei termini noti
+   * @param x0 vettore di partenza
+   * @param tol errore massimo tollerato
+   * @param max_iter massimo numero di iterazioni
+   * @param w parametro di rilassamento
+   * @return Eigen::VectorXd 
+   */
+  Eigen::VectorXd sor(const Eigen::MatrixXd &A, const Eigen::VectorXd &b, const Eigen::VectorXd &x0, double tol, int max_iter, double w);
+  ```
