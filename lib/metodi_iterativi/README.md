@@ -27,9 +27,10 @@ $ ./main
    * @param x0 vettore di partenza
    * @param tol errore massimo tollerato
    * @param max_iter massimo numero di iterazioni
+   * @param file_name (opzionale) nome del file su cui scrivere le norme intermedie (per Gnuplot)
    * @return vettore soluzione
    */
-  Eigen::VectorXd jacobi(const Eigen::MatrixXd &A, const Eigen::VectorXd &b, const Eigen::VectorXd &x0, double tol, int max_iter);
+  Eigen::VectorXd jacobi(const Eigen::MatrixXd &A, const Eigen::VectorXd &b, const Eigen::VectorXd &x0, double tol, int max_iter, const std::string &file_name = "");
   ```
 
 - Metodo di Gauss-Seidel
@@ -43,9 +44,10 @@ $ ./main
    * @param x0 vettore di partenza
    * @param tol errore massimo tollerato
    * @param max_iter massimo numero di iterazioni
+   * @param file_name (opzionale) nome del file su cui scrivere le norme intermedie (per Gnuplot)
    * @return Eigen::VectorXd 
    */
-  Eigen::VectorXd cnum::gauss_seidel(const Eigen::MatrixXd &A, const Eigen::VectorXd &b, const Eigen::VectorXd &x0, double tol, int max_iter);
+  Eigen::VectorXd gauss_seidel(const Eigen::MatrixXd &A, const Eigen::VectorXd &b, const Eigen::VectorXd &x0, double tol, int max_iter, const std::string &file_name = "");
   ```
 
 - Successive Over Relaxation
@@ -59,7 +61,8 @@ $ ./main
    * @param tol errore massimo tollerato
    * @param max_iter massimo numero di iterazioni
    * @param w parametro di rilassamento
+   * @param file_name (opzionale) nome del file su cui scrivere le norme intermedie (per Gnuplot)
    * @return Eigen::VectorXd 
    */
-  Eigen::VectorXd sor(const Eigen::MatrixXd &A, const Eigen::VectorXd &b, const Eigen::VectorXd &x0, double tol, int max_iter, double w);
+  Eigen::VectorXd sor(const Eigen::MatrixXd &A, const Eigen::VectorXd &b, const Eigen::VectorXd &x0, double tol, int max_iter, double w, const std::string &file_name = "");
   ```

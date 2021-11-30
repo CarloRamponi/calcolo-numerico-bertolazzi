@@ -1,6 +1,6 @@
 #include "metodi_iterativi.h"
 
-Eigen::VectorXd cnum::jacobi(const Eigen::MatrixXd &A, const Eigen::VectorXd &b, const Eigen::VectorXd &x0, double tol, int max_iter) {
+Eigen::VectorXd cnum::jacobi(const Eigen::MatrixXd &A, const Eigen::VectorXd &b, const Eigen::VectorXd &x0, double tol, int max_iter, const std::string &file_name) {
 
     // Calcolo la matrice M di Jacobi (diagonale di A)
     Eigen::MatrixXd M = A.diagonal().asDiagonal();
@@ -34,12 +34,12 @@ Eigen::VectorXd cnum::jacobi(const Eigen::MatrixXd &A, const Eigen::VectorXd &b,
 }
 
 //Metodo di Gauss-Seidel
-Eigen::VectorXd cnum::gauss_seidel(const Eigen::MatrixXd &A, const Eigen::VectorXd &b, const Eigen::VectorXd &x0, double tol, int max_iter) {
+Eigen::VectorXd cnum::gauss_seidel(const Eigen::MatrixXd &A, const Eigen::VectorXd &b, const Eigen::VectorXd &x0, double tol, int max_iter, const std::string &file_name) {
     // Calcolo la matrice M di Gauss seidel (matrice triangolare inferiore)
     Eigen::MatrixXd M = A.triangularView<Eigen::Lower>().toDenseMatrix();
 
     // Calcolo la matrice N di Gauss seidel (matrice triangolare superiore, con diagonale nulla)
-    Eigen::MatrixXd N = A.triangularView<Eigen::StrictlyUpper>().toDenseMatrix();
+    Eigen::MatrixXd N = A - M;
 
     // Vettore soluzione
     Eigen::VectorXd x = x0;
@@ -66,12 +66,12 @@ Eigen::VectorXd cnum::gauss_seidel(const Eigen::MatrixXd &A, const Eigen::Vector
     return x;
 }
 
-Eigen::VectorXd cnum::sor(const Eigen::MatrixXd &A, const Eigen::VectorXd &b, const Eigen::VectorXd &x0, double tol, int max_iter, double w) {
+Eigen::VectorXd cnum::sor(const Eigen::MatrixXd &A, const Eigen::VectorXd &b, const Eigen::VectorXd &x0, double tol, int max_iter, double w, const std::string &file_name) {
     // Calcolo la matrice M di Gauss seidel (matrice triangolare inferiore)
     Eigen::MatrixXd M = A.triangularView<Eigen::Lower>().toDenseMatrix();
 
     // Calcolo la matrice N di Gauss seidel (matrice triangolare superiore, con diagonale nulla)
-    Eigen::MatrixXd N = A.triangularView<Eigen::StrictlyUpper>().toDenseMatrix();
+    Eigen::MatrixXd N = A - M;
 
     // Vettore soluzione
     Eigen::VectorXd x = x0;
