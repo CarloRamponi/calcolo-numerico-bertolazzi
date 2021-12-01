@@ -19,5 +19,14 @@ namespace cnum{
     tra gli estremi a e b, usando n_intervalli valutazioni
     della funzione, usando il metodo midpoint*/
 
-    
+    using Integration_Method = bool(double, double, int ,double(double), double&);
+    // Forma comoda per esprimere una funzione che è un metodo di integrazione numerica definita
+
+    bool adaptive_integration(double a, double b, double (*PFUN)(double), double tol, double &res,
+                            Integration_Method (*integ1), Integration_Method (*integ2));
+    /*Funzione che integra numericamente la funzione f
+    tra gli estremi a e b, tramite integrazione adattiva;
+    tol è la tolleranza (assoluta);
+    il metodo utilizza 2 metodi di integrazione integ1 ed
+    integ2 per ottenere una stima dell'errore di integrazione*/
 }

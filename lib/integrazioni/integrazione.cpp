@@ -64,3 +64,23 @@ bool cnum::integrazione_midpoint(double a, double b, int n_intervalli, double (*
 
 }
 
+
+bool cnum::adaptive_integration(double a, double b, double (*PFUN)(double), double tol, double &res,
+                            Integration_Method (*integ1), Integration_Method (*integ2)){
+    double res1, res2, err;
+
+    int n=1;
+    do{
+        n*=10;   //Aumenta n
+        if(integ1( a, b, n, *PFUN, res1 )==0) //Primo metodo
+            return 0; //Esce in caso di errori
+        if(integ2( a, b, n, *PFUN, res2 )==0) //Secondo metodo
+            return 0;
+        err=abs( res2 - res1 ) / 3.;
+        cout<<n<<"\n";
+    }while(err>tol); //Se l'errore è troppo grande riesegui con una n più grande
+    
+
+    res=(res1+res2)/2;
+    return 1;
+}
