@@ -7,7 +7,7 @@ Nelle attività scientifiche e tecnologiche, e in genere negli studi quantitativ
 
 Libreria `interpol.cpp` per interpolare polinomi con metodo di Lagrange e di Newton che si appoggia sulla libreria per gestire i polinomi `poly.cpp`.
 
-Per utilizzarla modificare il valore della variabile EigenPath nel makefile con il proprio percorso per Eigen e dopo essersi spostati nella cartella `interpolazioni` effettuare il comando:
+Per utilizzarla modificare il valore della variabile `EigenPath` nel `makefile` con il proprio percorso per Eigen e dopo essersi spostati nella cartella `interpolazioni` effettuare il comando:
 
 ```bash
 $ make
