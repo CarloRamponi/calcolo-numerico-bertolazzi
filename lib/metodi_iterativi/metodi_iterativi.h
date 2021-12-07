@@ -3,43 +3,50 @@
 namespace cnum {
 
     /**
-        * @brief Metodo di Jacobi
-        * @author Carlo Ramponi
-        * @param A matrice dei coefficienti
-        * @param b vettore dei termini noti
-        * @param x0 vettore di partenza
-        * @param tol errore massimo tollerato
-        * @param max_iter massimo numero di iterazioni
-        * @param file_name (opzionale) nome del file su cui scrivere le norme intermedie (per Gnuplot)
-        * @return vettore soluzione
-    */
-    Eigen::VectorXd jacobi(const Eigen::MatrixXd &A, const Eigen::VectorXd &b, const Eigen::VectorXd &x0, double tol, int max_iter, const std::string &file_name = "");
+     * Il formato dei file di input è il seguente:
+     * M N <- dimensione matrice
+     * a11 a12 ... a1N
+     * a21 a22 ... a2N
+     * ...
+     * aM1 aM2 ... aMN
+     * b1 b2 ... bN
+     */
+
+    /**
+     * @brief Metodo di Jacobi
+     * @author Carlo Ramponi
+     * 
+     * @param input_file nome del file di input (formato definito sopra)
+     * @param output_file nome del file di output
+     * @param tol norma dei residui massima tollerata
+     * @param max_iter massimo numero di iterazioni
+     * @return Eigen::VectorXd vettore soluzione
+     */
+    Eigen::VectorXd jacobi(const std::string &input_file, const std::string &output_file, double tol, int max_iter);
 
     /**
      * @brief Metodo di Gauss-Seidel
      * @author Carlo Ramponi
-     * @param A matrice dei coefficienti
-     * @param b vettore dei termini noti
-     * @param x0 vettore di partenza
-     * @param tol errore massimo tollerato
+     * 
+     * @param input_file nome del file di input (formato definito sopra)
+     * @param output_file nome del file di output
+     * @param tol norma dei residui massima tollerata
      * @param max_iter massimo numero di iterazioni
-     * @param file_name (opzionale) nome del file su cui scrivere le norme intermedie (per Gnuplot)
-     * @return Eigen::VectorXd 
+     * @return Eigen::VectorXd vettore soluzione
      */
-    Eigen::VectorXd gauss_seidel(const Eigen::MatrixXd &A, const Eigen::VectorXd &b, const Eigen::VectorXd &x0, double tol, int max_iter, const std::string &file_name = "");
+    Eigen::VectorXd gauss_seidel(const std::string &input_file, const std::string &output_file, double tol, int max_iter);
 
     /**
      * @brief Successive Over Relaxation
      * @author Carlo Ramponi
-     * @param A matrice dei coefficienti
-     * @param b vettore dei termini noti
-     * @param x0 vettore di partenza
-     * @param tol errore massimo tollerato
+     *
+     * @param input_file nome del file di input (formato definito sopra)
+     * @param output_file nome del file di output
+     * @param tol norma dei residui massima tollerata
      * @param max_iter massimo numero di iterazioni
      * @param w parametro di rilassamento
-     * @param file_name (opzionale) nome del file su cui scrivere le norme intermedie (per Gnuplot)
-     * @return Eigen::VectorXd 
+     * @return Eigen::VectorXd vettore soluzione
      */
-    Eigen::VectorXd sor(const Eigen::MatrixXd &A, const Eigen::VectorXd &b, const Eigen::VectorXd &x0, double tol, int max_iter, double w, const std::string &file_name = "");
+    Eigen::VectorXd sor(const std::string &input_file, const std::string &output_file, double tol, int max_iter, double w);
 
 }

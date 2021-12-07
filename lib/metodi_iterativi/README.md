@@ -4,14 +4,34 @@ In analisi numerica un metodo numerico iterativo è un tipo di metodo numerico n
 
 In questa cartella verranno incluse varie funzioni che possono essere utilizzate per risolveere un problema utilizzando un metodo iterativo
 
-Per utilizzare la libreria, includere il file `metodi_iterativi.h` e compilare il file `metodi_iterativi.cpp` con i propri sorgenti.
+Per utilizzare la libreria, includere il file [`metodi_iterativi.h`](metodi_iterativi.h) e compilare il file [`metodi_iterativi.cpp`](metodi_iterativi.cpp) con i propri sorgenti.
 
-Un esempio di utilizzo della libreria si può trovare nel file `main.cpp`
+Un esempio di utilizzo della libreria si può trovare nel file [`test/main.cpp`](test/main.cpp)
 
-Per compilare ed eseguire il test, eseguire questo comando (nella cartella `metodi_iterativi`):
+Per compilare ed eseguire il test, eseguire questi comandi:
 ```bash
-$ g++ -o main main.cpp metodi_iterativi.cpp -I<Cartella contenente la libreria Eigen>
+$ cd lib/metodi_iterativi/test
+$ g++ -o main.out main.cpp ../metodi_iterativi.cpp -I<Cartella contenente la libreria Eigen>
 $ ./main
+```
+Questo test esegue i tre metodi iterativi sull'input definito del file `intput.dat` e genera i tre rispettivi grafici.
+
+Per generare un grafico, partendo da un file generato da una di queste funzioni, eseguire questi comandi:
+```bash
+$ gnuplot -c plot.gp "<file generato>" "<nome file di output (.pdf)>"
+```
+
+## Formato file di input
+
+Tutte le funzioni in questa cartella prevedono un file di input in formato questo formato:
+
+```
+N M
+A11 A12 ... A1N
+A21 A22 ... A2N
+...
+AN1 AN2 ... ANN
+b1 b2 ... bN
 ```
 
 ## Metodi trattati
@@ -22,15 +42,14 @@ $ ./main
   /**
    * @brief Metodo di Jacobi
    * @author Carlo Ramponi
-   * @param A matrice dei coefficienti
-   * @param b vettore dei termini noti
-   * @param x0 vettore di partenza
+   * 
+   * @param input_file nome del file di input (formato definito sopra)
+   * @param output_file nome del file di output
    * @param tol errore massimo tollerato
    * @param max_iter massimo numero di iterazioni
-   * @param file_name (opzionale) nome del file su cui scrivere le norme intermedie (per Gnuplot)
-   * @return vettore soluzione
-   */
-  Eigen::VectorXd jacobi(const Eigen::MatrixXd &A, const Eigen::VectorXd &b, const Eigen::VectorXd &x0, double tol, int max_iter, const std::string &file_name = "");
+   * @return Eigen::VectorXd vettore soluzione
+  */ 
+  Eigen::VectorXd cnum::jacobi(const std::string &input_file, const std::string &output_file, double tol, int max_iter);
   ```
 
 - Metodo di Gauss-Seidel
@@ -39,15 +58,14 @@ $ ./main
   /**
    * @brief Metodo di Gauss-Seidel
    * @author Carlo Ramponi
-   * @param A matrice dei coefficienti
-   * @param b vettore dei termini noti
-   * @param x0 vettore di partenza
-   * @param tol errore massimo tollerato
+   * 
+   * @param input_file nome del file di input (formato definito sopra)
+   * @param output_file nome del file di output
+   * @param tol norma dei residui massima tollerata
    * @param max_iter massimo numero di iterazioni
-   * @param file_name (opzionale) nome del file su cui scrivere le norme intermedie (per Gnuplot)
-   * @return Eigen::VectorXd 
+   * @return Eigen::VectorXd vettore soluzione
    */
-  Eigen::VectorXd gauss_seidel(const Eigen::MatrixXd &A, const Eigen::VectorXd &b, const Eigen::VectorXd &x0, double tol, int max_iter, const std::string &file_name = "");
+  Eigen::VectorXd gauss_seidel(const std::string &input_file, const std::string &output_file, double tol, int max_iter);
   ```
 
 - Successive Over Relaxation
@@ -55,14 +73,13 @@ $ ./main
   /**
    * @brief Successive Over Relaxation
    * @author Carlo Ramponi
-   * @param A matrice dei coefficienti
-   * @param b vettore dei termini noti
-   * @param x0 vettore di partenza
-   * @param tol errore massimo tollerato
+   *
+   * @param input_file nome del file di input (formato definito sopra)
+   * @param output_file nome del file di output
+   * @param tol norma dei residui massima tollerata
    * @param max_iter massimo numero di iterazioni
    * @param w parametro di rilassamento
-   * @param file_name (opzionale) nome del file su cui scrivere le norme intermedie (per Gnuplot)
-   * @return Eigen::VectorXd 
+   * @return Eigen::VectorXd vettore soluzione
    */
-  Eigen::VectorXd sor(const Eigen::MatrixXd &A, const Eigen::VectorXd &b, const Eigen::VectorXd &x0, double tol, int max_iter, double w, const std::string &file_name = "");
+  Eigen::VectorXd sor(const std::string &input_file, const std::string &output_file, double tol, int max_iter, double w);
   ```
