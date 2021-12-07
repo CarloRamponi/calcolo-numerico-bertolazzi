@@ -45,5 +45,25 @@ int main(){
     real=log(256)-3;
     cout<<"Valore reale \t\t\tI="<<real<<"\n";
     cout<<"Errore relativo="<<(res-real)/real<<"\n\n";
+
+
+    cout<<"\n\nINTEGRAZIONE ADATTIVA\n\n";
+    double tol=pow(10,-6);
+    //Testiamo sulla funzione radice diretto dalla libreria cmath
+    adaptive_integration(0,1,&sqrt,tol,res, integrazione_midpoint, integrazione_Simpson);
+    cout<<"f(x)=sqrt(x) integrata da 0 a 1\tI="<<res<<"\n";
+    real=(double)2 /3;
+    cout<<"Valore reale \t\t\tI="<<real<<"\n";
+    cout<<"Errore relativo="<<(res-real)/real<<"\n\n";
+
+    adaptive_integration(1,4,&log,tol,res, integrazione_midpoint, integrazione_Simpson);
+    //Stessa cosa con logaritmo
+    cout<<"f(x)=ln(x) integrata da 1 a 4\tI="<<res<<"\n";
+    real=log(256)-3;
+    cout<<"Valore reale \t\t\tI="<<real<<"\n";
+    cout<<"Errore relativo="<<(res-real)/real<<"\n\n";
+
+
+
     return 1;
 }
