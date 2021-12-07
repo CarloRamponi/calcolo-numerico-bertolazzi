@@ -1,4 +1,4 @@
-# calcolo-numerico-bertolazzi
+# Calcolo Numerico, Bertolazzi @ DII @ UniTN
 
 Libreria creata per il corso di Calcolo Numerico.
 
