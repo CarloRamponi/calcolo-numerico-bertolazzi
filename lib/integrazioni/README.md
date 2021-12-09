@@ -63,3 +63,20 @@ $ ./main
    */
   bool adaptive_integration(double a, double b, double (*PFUN)(double), double tol, double &res, Integration_Method (*integ1), Integration_Method (*integ2));
   ```
+
+- Visualizzazione metodi
+
+  ```C++
+  /**
+   * @brief Metodo per 
+   * @author Davide Micheli
+   * @param a Limite inferiore integrazione
+   * @param b Limite superiore integrazione
+   * @param PFUN pointer alla funzione da integrare
+   * @param n_intervalli numero di sottodivisioni dell'intervallo
+   * @param res valore dell'integrale
+   * @return bool indicante successo nell'esecuzione della funzione
+   */
+  bool visualize_trapezes(double a, double b, int n_intervalli, double (*PFUN)(double), double &res)
+  ```
+Per quest'ultimo metodo, si noti che i files di output vengono prodotti nella cartella stessa (è in linea di principio possibile riadattare le funzioni per scegliere cartella e nome dei target files). Da usare insieme a p_integ. La funziona mostra cosa succede quando si utilizza il metodo dei trapezi su una funzione fissata in main_plot_integrazione.cpp

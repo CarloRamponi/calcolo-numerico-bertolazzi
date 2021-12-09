@@ -1,0 +1,27 @@
+# gnuplot scritp
+
+# setup dell'output
+set terminal pdf size 8, 5 font "Helvetica, 12"
+set output "plot.pdf"
+
+
+# segna l'asse X alla posizione y=0
+set xzeroaxis
+
+unset colorbox                          # rimuove la barra laterale dei colori
+
+# estrae una statistica preventiva dai dataset di un file,
+# qui serve solo per sapere quanti 'dataset' ci sono
+# (ovvero quanti sono i passi eseguiti dall'algoritmo ricorsivo)
+stats "plot_integrazione.txt" nooutput
+
+# il primo 'dataset' corrisponde alla funzione
+# tutti i successivi sono i punti che fanno da intervallo per il metodo adattativo
+# questi vengono plottati in un loop
+#do for [ i = 1:int( STATS_blocks )-1 ] {
+#	plot	"plot_integrazione.txt" index i with lines linetype 6 linewidth 2, \
+#}
+
+#Per distinguere i colori, meglio usare due file diversi
+plot	"plot_trapezi.txt" with lines linetype 6 linewidth 2 linecolor rgb "#000000", \
+	    "plot_funzione.txt" with lines linetype 6 linewidth 2 linecolor rgb "#0000FF",

@@ -29,4 +29,13 @@ namespace cnum{
     tol è la tolleranza (assoluta);
     il metodo utilizza 2 metodi di integrazione integ1 ed
     integ2 per ottenere una stima dell'errore di integrazione*/
+
+    bool visualize_trapezes(double a, double b, int n_intervalli, double (*PFUN)(double), double &res);
+    /*Funzione che integra numericamente la funzione f
+    tra gli estremi a e b usando n_intervalli valutazioni
+    della funzione, usando il metodo dei trapezi. Come peculiarità,
+    questa funzione genera un file di testo atto a visualizzare
+    l'integrale computato in un gnuplot script*/
+
+    
 }
