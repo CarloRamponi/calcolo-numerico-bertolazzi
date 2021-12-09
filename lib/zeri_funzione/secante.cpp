@@ -1,9 +1,9 @@
-#include "secante.h"
+#include "roots.h"
 
 using namespace std;
 
 // Secant method with a function as input
-bool zerosecant(double & x1, double & x2, double tol, int max_iter, double (*f)(double))
+bool secant(double & x1, double & x2, double tol, int max_iter, double (*f)(double))
 {
     if (f(x1)*f(x2)>0) 
     {
@@ -13,7 +13,7 @@ bool zerosecant(double & x1, double & x2, double tol, int max_iter, double (*f)(
 
     double x_;
     ofstream iterations ("secantdata.csv");     // Opening file to print info to
-    iterations << "'x', 'f' " << endl;          // Headings for file
+    iterations << "x, f " << endl;          // Headings for file
 
     
     for (int i=0; i<max_iter; i++)
