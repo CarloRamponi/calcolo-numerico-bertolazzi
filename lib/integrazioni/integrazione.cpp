@@ -140,3 +140,27 @@ bool cnum::visualize_trapezes(double a, double b, int n_intervalli, double (*PFU
 
     return 1;
 }
+
+bool cnum::gaussian_quadrature_standard(double (*PFUN)(double), double &res){
+    //Nota: funzione definita con n=7 senza alcuna vera ragione
+    //  posso usarla per valutare integrali più generali (con bounds diversi e precisione maggiore)
+    //  mediante un esecuzione saggia (provate ad implementarla voi stessi)
+    //  Per funzioni complesse usare una n più grande è in genere più conveniente
+
+    //Definisco x e i pesi come costanti, in modo che il compilatore possa sostituire direttamente il valore
+    // numerico senza dover ricalcolare il vettore, per rendere l'esecuzione efficiente
+    const double x[7]={-0.9491079123,-0.7415311856,-0.4058451514,0,
+                        0.4058451514,0.7415311856,0.9491079123};
+    
+    const double weights[7]={0.1294849662,0.2797053915,0.3818300505,0.4179591837,
+                        0.3818300505,0.2797053915,0.1294849662};
+
+    //Computiamo l'integrale
+    res=0;
+    for(int i=0;i<7;i++)
+        res+=weights[i]*PFUN(x[i]);
+
+    return 1;
+
+};
+
