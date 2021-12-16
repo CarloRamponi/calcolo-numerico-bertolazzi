@@ -100,3 +100,48 @@ Poly NewtonInterpolation(VectorXd x, VectorXd fx){
     return f;
 }
 
+// write the polynomial formatted for Gnuplot
+std::string printPolGnuplot( Poly pol){
+    string output = "";
+    VectorXd polCoeff = pol.get_coef();
+    output += "P(x) = ";
+    if (polCoeff(0) != 0) {
+        output +=  to_string( polCoeff(0) );
+    }
+    for (int i=1; i<polCoeff.size(); i++){
+        if (polCoeff(i) != 0) {
+            if (polCoeff(i) > 0) {
+                output +=  " +" + to_string( polCoeff(i) ) + "*x**" + to_string(i);
+            }
+            else {
+                output +=  " " + to_string( polCoeff(i) ) + "*x**" + to_string(i);
+
+            }
+        }
+    }
+    return output;
+}
+
+// Reads two columns of data from file into a two column matrix
+MatrixXd readCSV( string filename){
+    ifstream in( filename );
+    string line;
+
+    int nRows = count(istreambuf_iterator<char>(in), istreambuf_iterator<char>(), '\n') + 1;
+    MatrixXd columns(nRows, 2);
+    //cout << columns << endl;
+    in.seekg(0);
+
+    for (int i=0; i<nRows; i++) {
+        //cout << "  " << i << endl;
+        getline( in, line );     // read a whole line of the file
+        stringstream ss( line );     // put it in a stringstream (internal stream)
+        string data;
+        getline( ss, data, ',' );
+        columns(i, 0) = stod( data );
+        getline( ss, data, '\n' );
+        columns(i, 1) = stod( data );
+    }
+
+   return columns;
+}
