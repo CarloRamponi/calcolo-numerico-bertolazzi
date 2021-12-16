@@ -37,5 +37,8 @@ namespace cnum{
     questa funzione genera un file di testo atto a visualizzare
     l'integrale computato in un gnuplot script*/
 
-    
+    bool gaussian_quadrature_standard(double (*PFUN)(double), double &res);
+    /*Funzione che integra numericamente la funzione f
+    tra gli estremi in -1 e 1 usando 7 valutazioni
+    della funzione tramite quadratura di Gauss.*/
 }

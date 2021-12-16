@@ -64,6 +64,12 @@ int main(){
     cout<<"Errore relativo="<<(res-real)/real<<"\n\n";
 
 
+    cout<<"\n\nQUADRATURA DI GAUSS-LEGENDRE\n\n";
+    gaussian_quadrature_standard(&exp, res);
+    cout<<"f(x)=exp(x) integrata da -1 a 1\tI="<<res<<"\n";
+    real=exp(1)-1./exp(1);
+    cout<<"Valore reale \t\t\tI="<<real<<"\n";
+    cout<<"Errore relativo="<<(res-real)/real<<"\n\n";
 
     return 1;
 }
