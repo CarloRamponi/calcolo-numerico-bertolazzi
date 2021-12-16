@@ -1,8 +1,16 @@
-#include "roots.h"
+#include "roots.hpp"
 
 using namespace std;
 
-// Secant method with a function as input
+/* Metodo della secanteper trovare gli zeri di una funzione.
+    I primi due argomenti sono i punti da cui far partire il metodo iterativo, 
+    e dato che non facciamo alcuna ricerca preliminare degli intervalli in cui il segno
+    della funzione si inverte, è l'utente a dover scegliere un intervallo iniziale appropriato.
+    Il terzo argomento è la tolleranza data prima di considerare il punto trovato uno zero.
+    Il quarto argomento è il numero massimo di iterazioni consentito, dopo il quale la funzione
+    ritornerà 0.
+    L'ultimo argomento è la funzione da passare di cui si sta cercando lo zero.
+*/
 bool secant(double & x1, double & x2, double tol, int max_iter, double (*f)(double))
 {
     if (f(x1)*f(x2)>0) 
@@ -14,6 +22,7 @@ bool secant(double & x1, double & x2, double tol, int max_iter, double (*f)(doub
     double x_;
     ofstream iterations ("secantdata.csv");     // Opening file to print info to
     iterations << "x, f " << endl;          // Headings for file
+    iterations << x2 << ", " << fabs(f(x2)) << endl;
 
     
     for (int i=0; i<max_iter; i++)
